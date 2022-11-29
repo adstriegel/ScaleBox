@@ -1,0 +1,10 @@
+Punch Out List for FMNC
+
+High Priority Items
+
+* Get the connection to properly terminate!!!
+
+Medium Priority Items
+
+* Track TCP options as requested by client
+

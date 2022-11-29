@@ -1,0 +1,116 @@
+* README file for RIPPS
+
+== Source Code Overview
+
+ - RIPPS_Support.cc	: Mapping of module and object names for core of ScaleBox
+ - RIPPS_Monitor.cc : Monitor for the core of RIPPS operations
+ 
+
+Tags to denote packet tap
+  WAN or External			External side
+  MonitorLAN or Internal   	Internal monitor host side
+ 
+ 
+ 
+Settings - RIPPS Monitor
+
+monitorInterval		Time between re-validation of hosts (in seconds)
+
+======================================
+<monitorInterval>
+
+The default time in seconds between monitor points for a particular 
+host following a successful resolution of the medium connection type.  
+
+Default Value = 30 seconds
+
+======================================
+
+Wed - List
+  Need to get a successful run of non-slicing working
+     Take a connection on the Mac mini from start to finish
+        Connection + Connection Summary
+
+Thurs - List
+  Need to get a successful run w/RIPPS
+     Take a connection on the Mac mini from start to finish
+     Take a connection on the Lenovo from start to finish
+
+Friday - List
+  Get all slides printed
+  Run demo setup and validate to make sure it will work with NGW100
+        
+Saturday
+  Handle any slippage but in general - work on viewer
+  
+Sunday
+  No real time until evening (?)
+  
+Monday
+  Traveling to Phoenix
+  Validate demo in room to web server on Mac PowerBook        
+        
+Task List for INFOCOM Demo
+
+ -> Improved Java GUI functionality
+ 	  To be done later (always add / mock up as necessary in flight if we have to)
+ 	  
+ -> Host-wise stat reporting via the normal stat operations
+     -> Individual RTTs is going to be tricky on the NGW - ignore for nwo
+     -> Bulk reporting is worthwhile of summarized connections for RTT
+     
+    RIPPS_Connection		All but linkage to list of monitor packets
+    RIPPS_ConnSummary		None - linkage present from host
+    
+ -> Bug stomping
+  	 -> Seg fault - figure out where it is
+  	 
+ -> Ability to turn RIPPS on and off but still monitor
+     -> Optional: Ability to turn on and off while running live
+     -> Need
+          - Ability to turn slicing off and still capture data
+              Use that as a start point for Wednesday to work from and get all other
+                statistics going 
+     
+ -> Hard filters
+     -> Do not pass through streaming statistic info thinking it is for the passthrough
+     -> Do a hard filter at RIPPS which will cover both in/out packets due to its taps
+     	 -> Squelch all 10.0.0.1 for the LAN-side IP
+     -> SSH traffic falls into a similar boat
+          - Hard code a specific IP or IPs to ignore for all operations
+          - Toss that into RIPPS to gobble the packets
+
+ -> Pre-printed color PowerPoint slides
+      NetScale URL
+      
+      ScaleBox Overview
+      
+      Slicing concept w/TCP Sting (from presentation)
+      
+      Bar graph performance slide (from presentation)
+         
+      Title Slide w/Acks
+         
+Hardware needed
+  
+  WLAN --> Mac PowerBook --- Cat 5 --- NGW100 --- Cat 5 --- Switch
+  
+  Switch |---- NAT ---|--- WLAN  iPod Touch
+         |            |--- WLAN  Tablet 
+         |            |--- Wired Tablet
+         |
+         |---- Hookup for command/control 
+ 
+Hardware list
+ - Belkin 54G router
+ - NGW100 w/2GB SD card
+ - iPod Touch w/USB charge cable
+ - Lenovo x60 tablet
+ - Mac PowerBook
+ - Power Strip 
+ - 6x Cat 5 cables
+ - Pins
+ 
+Pre-print Atmel Network Performance Sheet
+Pre-print 10x of TISSEC paper
+

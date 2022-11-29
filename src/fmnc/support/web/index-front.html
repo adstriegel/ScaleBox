@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body {
+  font: 15px sans-serif;
+}
+
+</style>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>FMNC Web Tool</title>
+</head>
+<body>
+
+<h1>Fast Mobile Network Characterization</h1>
+
+Welcome to the Fast Mobile Network Characterization (FMNC) web tool!  This particular tool 
+is a web instantiation of the FMNC tool suite.  The tool suite allows you to test how well 
+your particular network connection is performing.  The tool is part of a larger project 
+instrumenting wireless performance by <a href="http://www.nd.edu/~striegel">Prof. Aaron Striegel</a> 
+at the <a href="http://wireless.nd.edu">Wireless Institute</a> at the 
+<a href="http://www.nd.edu">University of Notre Dame</a>.  
+
+<h2>How It Works</h2>
+
+As you are downloading this web page from a FMNC server, the server is applying a bit of interesting packet shaping to the normal network connection.  In short, we do a bit of slicing
+(chopping up this content into small chunks) and rearrangement to create a profile of how your network connection (cellular, WiFi) is doing.  The goal of the tool is to do this with
+as little as data as possible in as short of a time period as possible.  By the time you read this message, the actual test will have completed, hopefully in a bit less than a quarter
+of a second. The FMNC server is a bit like a normal web server with a few slight modifications to allow us to instrument.  
+
+All data that we gather (especially via this web tool) is nearly anonymous.  While we do know where you came from (sort of via your IP address), we do not know anything besides your
+browser about how you are getting to us.  The important part for us as researchers is to get a sense of all of the different kinds of connectivity that get you to us, whether that
+network connection comes through a dash of wireless or a pure wired connection the whole way through.  Enjoy, your results should be coming up shortly.
+
+<!-- FMNC-INSERT-FILLER - Note that this is the spot where a bunch of dummy data gets inserted that is simply comments
+     and other rather uninteresting technological Wizard of Oz magic.  Pay no real attention to this blurb, we use it 
+     just to create the illusion of heft to give us the requisite 8-10k we need for instrumentation. -->
+
+<h2>Recap Data Performance</h2>
+
+<!-- Variables Used denoted by the dollar sign and pound sign combo $# -->
+<!--   ServerIP  The IP address of the server -->
+<!--   SessionID The session ID associated with this run -->  
+
+<a href="http://$#ServerIP#$/results/$#SessionID#$">Click here to view the recent results for this particular session</A>
+
+<a href="http://$#ServerIP#$/results/All">Click here to see all results still in the server cache</A>
+
+<p>
+Note that the actual results are finished once you complete downloading this particular webpage. Once it 
+finishes rendering, we are done.  The above link takes you to the server to make a query for your finished results
+or if you are curious, any other runs in the recent timeframe.    
+</p>
+
+</body>
+</html>

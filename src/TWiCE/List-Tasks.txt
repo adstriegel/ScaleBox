@@ -1,0 +1,13 @@
+Task List for TWiCE
+
+Work through the general cache population issue
+	Goal: Monday night - run it on our WiFi traffic, should be able to
+	 		fill it up
+	 		
+	Goal: Fill in the initial population / configuration file (twicegw.xml)
+			in the cfg directory with MacBook Pro config
+			
+	Goal: Allow command-line querying of the cache table via the extended
+	 		command interface
+	 		
+	 		

@@ -1,0 +1,50 @@
+#ifndef INPUTRIPPSINTERNAL_H_
+#define INPUTRIPPSINTERNAL_H_
+
+#include "IOModule.h"
+
+class Packet;
+class StatsOutputWrite;
+class NodeDOM;
+
+/** The RIPPS input module monitoring packets coming from the LAN 
+ * (internal) side of the network
+ */
+class InputRIPPSInternal : public IOModule {
+	public:
+		InputRIPPSInternal ();
+		~InputRIPPSInternal ();
+	
+		/** Process a packet coming along the output chain. Appropriately
+		 * process the packet and/or create packets for output based on this
+		 * packet. The actual chaining is taken care of at the Adapter level
+		 * when the output chain is started upon reception of a packet.
+		 * @param pPacket A valid Packet object for processing
+		 * @returns 1 if this function has gobbled it (no more processing) or
+		 *          0 if the packet should be processed by future modules
+		 */ 
+		char		processPacket (Packet * pPacket);	
+	
+		/** Initialize an input module by applying any necessary 
+		 * startup functionality such as threads, thread safety, or 
+		 * other initializations. 
+		 * @returns True if successful, false otherwise
+		 */
+		char		initialize ();	
+		
+		/** Parse the DOM to populate the file where the DOM
+		 * is generated from an XML input file. The DOM should contain
+		 * the type of adapter and the underlying input and output
+		 * modules. The extractExtended function takes in the 
+		 * extended information specific to the child class. 
+		 * @param pNode The base node to process for information
+		 * @returns True if successful, false otherwise
+		 */		
+		 bool		extractExtendedDOM (NodeDOM * pNode);	
+		  	
+	private:
+	
+};
+
+
+#endif /*INPUTRIPPSINTERNAL_H_*/

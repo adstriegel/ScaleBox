@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body {
+  font: 15px sans-serif;
+}
+
+</style>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>FMNC Web Tool</title>
+</head>
+<body>
+
+<h2>Settings</h2>
+
+<table>
+<tr>
+<td>
+Host IP
+</td>
+<td>
+$#ClientIP#$
+</td>
+</tr>
+<tr>
+<td>
+Test Type
+</td>
+<td>
+$#TestType#$
+</td>
+</tr>
+<tr>
+<td>
+Test Outcome
+</td>
+<td>
+$#TestOutcome#$
+</td>
+</tr>
+<tr>
+<td>
+Test Size (Downstream)
+</td>
+<td>
+$#TestSize#$ bytes, $#TestPkts#$ packets
+</td>
+</tr>
+<tr>
+<td>
+Fixed Probes
+</td>
+<td>
+$#FixedPkts#$, $#FixedSize#$ bytes
+</td>
+</tr>
+<tr>
+<td>
+Spacing
+</td>
+<td>
+$#PacketSpacing#$ microseconds
+</td>
+</tr>
+<tr>
+<td>
+Variable Payloads
+</td>
+<td>
+$#VariablePktMin#$ - $#VariablePktMax#$, step size $#VariablePktStep#$
+</td>
+</tr>
+<tr>
+<td>
+Variable Sweeps
+</td>
+<td>
+$#VariableSequences#$ sweeps
+</td>
+</tr>
+<tr>
+<td>
+Variable Packets per Sweep
+</td>
+<td>
+$#VariableSeqPkts#$ packets each 
+</td>
+</tr>
+<tr>
+<td>
+Variable Packets (Total)
+</td>
+<td>
+$#VariablePkts#$ packets 
+</td>
+</tr>
+
+
+
+</table>
+
+<h2>Results</h2>
+
+<table>
+
+<tr>
+<td>
+Metric
+</td>
+<td>
+All
+</td>
+<td>
+Fixed
+</td>
+<td>
+Variable
+</td>
+</tr>
+
+<tr>
+<td>
+Samples (pkts)
+</td>
+<td>
+$#RTT_Samples_All#$ 
+</td>
+<td>
+$#RTT_Samples_Fixed#$
+</td>
+<td>
+$#RTT_Samples_Var#$
+</td>
+</tr>
+
+
+<tr>
+<td>
+RTT Range (ms)
+</td>
+<td>
+$#RTT_Min_All#$ - $#RTT_Max_All#$ 
+</td>
+<td>
+$#RTT_Min_Fixed#$ - $#RTT_Max_Fixed#$ 
+</td>
+<td>
+$#RTT_Min_Var#$ - $#RTT_Max_Var#$ 
+</td>
+</tr>
+
+<tr>
+<td>
+RTT Average (ms)
+</td>
+<td>
+$#RTT_Avg_All#$ 
+</td>
+<td>
+$#RTT_Avg_Fixed#$ 
+</td>
+<td>
+$#RTT_Avg_Var#$ 
+</td>
+</tr>
+
+<tr>
+<td>
+RTT Std Dev (ms)
+</td>
+<td>
+$#RTT_StdDev_All#$ 
+</td>
+<td>
+$#RTT_StdDev_Fixed#$ 
+</td>
+<td>
+$#RTT_StdDev_Var#$ 
+</td>
+</tr>
+
+<tr>
+<td>
+        Check the Link below for final result:
+</td>
+<td>
+        <a href="http://netscale03.crc.nd.edu/results/$#Result_Link#$.html" >Check Result</a>
+</td>
+</tr>
+
+</table>
+
+$#D3JS_GRAPH#$ 
+
+</body>
+</html>

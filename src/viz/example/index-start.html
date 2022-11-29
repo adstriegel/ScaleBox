@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body {
+  font: 15px sans-serif;
+}
+
+</style>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>FMNC Web Tool</title>
+</head>
+<body>
+<h1>Fast Mobile Network Characterization</h1>
+
+Welcome to the Fast Mobile Network Characterization (FMNC) web tool!  This particular tool is a web instantiation of the FMNC tool suite allowing you to verify how fast your particular
+network connection is performing.  The tool is part of a larger project instrumenting wireless performance by Prof. Aaron Striegel at the Wireless Institute at the University of 
+Notre Dame.  
+
+<h2>How It Works</h2>
+
+As you are downloading this webpage from a FMNC server, the server is applying a bit of interesting packet shaping to the normal network connection.  In short, we do a bit of slicing
+(chopping up this content into small chunks) and rearrangement to create a profile of how your network connection (cellular, WiFi) is doing.  The goal of the tool is to do this with
+as little as data as possible in as short of a time period as possible.  By the time you read this message, the actual test will have completed, hopefully in a bit less than a quarter
+of a second. The FMNC server is a bit like a normal web server with a few slight modifications to allow us to instrument.  
+
+All data that we gather (especially via this web tool) is nearly anonymous.  While we do know where you came from (sort of via your IP address), we do not know anything besides your
+browser about how you are getting to us.  The important part for us as researchers is to get a sense of all of the different kinds of connectivity that get you to us, whether that
+network connection comes through a dash of wireless or a pure wired connection the whole way through.  Enjoy, your results should be coming up shortly.
+
+<h2>Results</h2>
+
+The results are computed using test sequence number 3 which includes: uniform size / spacing, variable packet sizing.  
+
+
+<svg id="visualisation" width="1000" height="500"></svg>
+
+<h3>Final Notes</h3>
+
+Want more information about the FMNC project?  Visit our Wiki which contains details with regards to our current research based on data coming from this exact tool.
+
+Are you mobile?  Come grab the Android app or iOS app from the respective App Stores.  The tool is free to use and offers the ability to see the quality of your WiFi or cellular
+connection over time.
+
+<script src="http://d3js.org/d3.v3.js"></script>
+<script>
+
+var lineData = 

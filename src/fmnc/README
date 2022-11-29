@@ -1,0 +1,40 @@
+Fast Mobile Network Characterization Tool
+
+Premise:
+
+Divine using in-band techniques performance bottlenecks
+with respect to the last-mile wireless links and next-to-last
+mile broadband links.
+
+
+How It Works:
+
+The Fast Mobile Network Characterization tool builds on prior work
+at the University of Notre Dame with RIPPS to use similar 
+packet slicing / rearrangement to instrument the last and next-to-last
+mile wireless links.  The tool itself draws its inspiration from
+TCP Sting by Savage in the late 90's.  In short, we slice typical
+TCP payloads into smaller payload slices and then rearrange the first
+slice to the end to force multiple TCP acknowledgements.
+
+The end result is that we can effectively squeeze rapid fire
+acknowledgments out of unmodified TCP hosts using minimal bandwidth
+and consuming only a minimal amount of time.  
+  
+To illustrate, consider a normal TCP flow consisting of nearly full
+MSS (Maximum Segment Size) payloads approaching 1460 bytes.  Normally,
+one would send the packets in order while obeying normal TCP slow
+start congestion window growth (CWND).  
+
+CWND = 1 packet
+	Send 1460 to client
+		Ack from client
+CWND = 2 packets
+	Send 1460 to client
+	Send 1460 to client
+		Ack from client for 2 data packets
+CWND = 4 packets
+	Send 1460 to client
+	Send 1460 to client
+	Send 1460 to client
+	Send 1460 to client 

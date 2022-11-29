@@ -1,0 +1,43 @@
+Task List for Proximity-Secure Mixing
+
+* Simple operation (forward / relay)
+	Validate cnn.com
+	Validate YouTube video
+	Validate Pandora
+	
+* Log content to the disk
+	tcpdump without any changes running on the host
+	tcpdump equivalent inside of ScaleBox (queued I/O)
+
+* Conduct side analytics on ScaleBox in real-time
+	
+* Figure out how to do side storage for the VPN agent
+	How do we allocate space for the app
+	How do we access it
+	How do we send out-of-band packets via the app
+		How can the app detect storage changes by the VPN	
+
+* WiFi Direct
+	How do we do pairing / etc. when not connected to WiFi
+	Probably need a non-Nexus 7 to have cell + WiFi Direct
+
+
+Initial Tasks
+=================
+
+1) Forward / relay of a packet from a host to relay it onwards
+	
+	Need to set / establish the IP address
+		Actually OK if we are NAT'ing outwards
+		
+	Establish Dirk's toy VPN server except in ScaleBox
+		Initial nonce exchange
+	
+2) Attempt to direct the Nexus 7 at the box (MacBook Pro)
+	Connect to cnn.com successfully with the response
+	
+3) Get it running (monitor only) on a box @ ND that is publicly accessible
+	Re-direct smart phone at the box
+	
+
+

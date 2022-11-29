@@ -1,0 +1,23 @@
+<ScaleBox>
+	<!-- Single pcap adapter -->
+	<Adapter type="pcap">
+		<name>Input data adapter</name>
+		<device>eth1</device>
+		<!-- Start the input module chain -->
+		<InputModule type="PacketTap">
+			<targetModule>FMNC</targetModule>
+			<tapID>WAN</tapID>
+      	</InputModule>	
+       <InputModule type="InputPurge">
+       </InputModule>
+       <!-- Start the output module chain -->
+		<OutputModule type="OutputWrite">
+		</OutputModule>
+	</Adapter>
+
+	<Module type="FMNC-Server">
+		<name>FMNC</name>
+		<serverAddress>129.74.152.96</serverAddress>
+	</Module>	
+	
+</ScaleBox>

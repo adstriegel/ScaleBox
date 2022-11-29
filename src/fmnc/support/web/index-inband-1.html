@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+body {
+  font: 15px sans-serif;
+}
+
+</style>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>FMNC Web Tool</title>
+</head>
+<body>
+<!-- Version 0.5 - Prototype Client Page - Maintained via ND Subversion repository -->
+<!--   Repository Location - http://netscale.cse.nd.edu/svn/ScaleBox -->
+<!--  -->
+<!--  Note that this comment section is longer to provide "content" for the purposes of the core -->
+<!--   test rather than solely fake content -->
+<!--  -->
+<!--  Variables (replaced before distribution) - denoted by pound sign, dollar sign, reverse on close -->
+<!--      VersionServer   Version of the server -->
+<!--      VersionWeb      Version of this particular web template -->
+<!--      ServerURL       URL of the server (no http needed, just the hostname (with port ID if needed) -->
+<!--      TestID          Identifier for this particular test -->
+<!--      ClientID        Identifier for connections by this client -->
+<!--      Nonce   		  A unique nonce for purge identification -->
+
+<h1>Fast Mobile Network Characterization</h1>
+
+Welcome to the Fast Mobile Network Characterization (FMNC) web tool!  This particular tool 
+is a web instantiation of the FMNC tool suite.  The tool suite allows you to test how well 
+your particular network connection is performing.  The tool is part of a larger project 
+instrumenting wireless performance by <a href="http://www.nd.edu/~striegel">Prof. Aaron Striegel</a> 
+at the <a href="http://wireless.nd.edu">Wireless Institute</a> at the 
+<a href="http://www.nd.edu">University of Notre Dame</a>.  
+
+<h2>How It Works</h2>
+
+As you are downloading this web page from a FMNC server, the server is applying a bit of interesting packet shaping to the normal network connection.  In short, we do a bit of slicing
+(chopping up this content into small chunks) and rearrangement to create a profile of how your network connection (cellular, WiFi) is doing.  The goal of the tool is to do this with
+as little as data as possible in as short of a time period as possible.  By the time you read this message, the actual test will have completed, hopefully in a bit less than a quarter
+of a second. The FMNC server is a bit like a normal web server with a few slight modifications to allow us to instrument.  
+
+All data that we gather (especially via this web tool) is nearly anonymous.  While we do know where you came from (sort of via your IP address), we do not know anything besides your
+browser about how you are getting to us.  The important part for us as researchers is to get a sense of all of the different kinds of connectivity that get you to us, whether that
+network connection comes through a dash of wireless or a pure wired connection the whole way through.  Enjoy, your results should be coming up shortly.
+
+<!-- FMNC-TEST-BW-COMMENT -->  
+
+<h2>Results</h2>
+
+The results are computed using test sequence number 3 which includes: uniform size / spacing, variable packet sizing.  
+
+<svg id="visualization" width="1000" height="500"></svg>
+
+
+<h3>Final Notes</h3>
+
+Want more information about the FMNC project?  Visit our <a href="http://netscale.cse.nd.edu/">Wiki</a> 
+which contains details with regards to our current research based on data coming from this tool.
+<p>
+Are you mobile?  Come grab the Android app or iOS app from the respective App Stores.  
+The tool is free to use and offers the ability to see the quality of your WiFi or cellular connection 
+over time. 
+</p>
+Support for FMNC is provided by the industrial partners of the Wireless Institute as part of the
+BWAC IU/CRC site. The Notre Dame site for BWAC is supported in part through the 
+<a href="http://www.nsf.gov">National Science Foundation (NSF)</a> through Grant 14-XXXXX. 
+Further development support has been provided as well through
+NSF Grant 09-XXXXX and collaborations with <a href="http://www.sprint.com">Sprint</a> and Alcatel-Lucent.   
+
+<h3>Privacy</h3>
+The research for this project is considered IRB EXEMPT as classified by the Notre Dame Institutional
+Review board (pending).  All core identifying information (source IP, source port) are hashed for
+proper anonymization before committal to the FMNC database. If you wish to have this particular connection
+purged from the database, please click <a href="http://#$ServerURL$#/purge/#$TestID$#">here</a>.  Note that
+the purge link has a roughly 5 minute expiration. 
+
+<table>
+<tr>
+<td>
+FMNC in Your Site
+</td>
+<td>
+FAQ
+</td>
+<td>
+Privacy Policy
+</td>
+<td>
+Sponsoring FMNC
+</td>
+</tr>
+</table>
+
+
+</body>
+</html>
+
