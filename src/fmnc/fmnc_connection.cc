@@ -377,32 +377,32 @@ bool FMNC_Connection::populateDictionary_Base ()
 		m_pDictionary->addEntry("ClientIP", m_IP_Source.toString());
 		m_pDictionary->addEntry("ServerIP", m_IP_Dest.toString());
 
-		sprintf(szTemp, "%d", m_nPort_Source);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nPort_Source);
 		sData = szTemp;
 		m_pDictionary->addEntry("ClientPort", sData);
 
-		sprintf(szTemp, "%d", m_nPort_Dest);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nPort_Dest);
 		sData = szTemp;
 		m_pDictionary->addEntry("ServerPort", sData);
 
-		sprintf(szTemp, "%d", m_lSessionID);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_lSessionID);
 		sData = szTemp;
 		m_pDictionary->addEntry("SessionID", sData);
 
 
-		sprintf(szTemp, "%d", m_lPkts_Sent);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_lPkts_Sent);
 		sData = szTemp;
 		m_pDictionary->addEntry("PacketsTx", sData);
 
-		sprintf(szTemp, "%d", m_lPkts_Rcvd);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_lPkts_Rcvd);
 		sData = szTemp;
 		m_pDictionary->addEntry("PacketsRx", sData);
 
-		sprintf(szTemp, "%d", m_lBytes_Sent);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_lBytes_Sent);
 		sData = szTemp;
 		m_pDictionary->addEntry("BytesTx", sData);
 
-		sprintf(szTemp, "%d", m_lBytes_Received);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_lBytes_Received);
 		sData = szTemp;
 		m_pDictionary->addEntry("BytesRx", sData);
 	}
@@ -420,13 +420,13 @@ string FMNC_Connection::getAttributes_Base ()
 	sXMLAttr = "";
 
 	// When did this originate?
-	sprintf(szTemp, "%d.%d", m_Time_Creation.tv_sec, m_Time_Creation.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", m_Time_Creation.tv_sec, m_Time_Creation.tv_usec);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("CreationTime", sTemp);
 	sXMLAttr += " ";
 
 	// What is the ID for this particular connection?
-	sprintf(szTemp, "%d", m_lSessionID);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_lSessionID);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("SessionID", sTemp);
 	sXMLAttr += " ";
@@ -440,32 +440,32 @@ string FMNC_Connection::getAttributes_Base ()
 	sXMLAttr += createAttributeString("ServerIP", m_IP_Dest.toString());
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_nPort_Source);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nPort_Source);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("SrcPort", sTemp);
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_nPort_Dest);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nPort_Dest);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("DestPort", sTemp);
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_lPkts_Sent);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_lPkts_Sent);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("PktsTx", sTemp);
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_lPkts_Rcvd);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_lPkts_Rcvd);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("PktsRx", sTemp);
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_lBytes_Sent);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_lBytes_Sent);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("BytesTx", sTemp);
 	sXMLAttr += " ";
 
-	sprintf(szTemp, "%d", m_lBytes_Received);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_lBytes_Received);
 	sTemp = szTemp;
 	sXMLAttr += createAttributeString("BytesRx", sTemp);
 	sXMLAttr += " ";

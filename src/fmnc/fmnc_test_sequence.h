@@ -27,6 +27,12 @@ class FMNC_Transmit_BufferBlock
 {
 	public:
 		FMNC_Transmit_BufferBlock ();
+		~FMNC_Transmit_BufferBlock ();
+
+		// This class owns a raw data pointer with no reference counting; copying it
+		// would leave two objects believing they own (and will free) the same buffer.
+		FMNC_Transmit_BufferBlock (const FMNC_Transmit_BufferBlock &) = delete;
+		FMNC_Transmit_BufferBlock & operator= (const FMNC_Transmit_BufferBlock &) = delete;
 
 		/** Set the pointer for the current data block.  Note that it is the responsibility
 		 * of the caller to have checked and handled any memory allocations if there is

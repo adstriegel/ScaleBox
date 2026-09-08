@@ -48,7 +48,11 @@ void	FMNC_ManagerStats::Get_Title	(int nStat, char * szTitle)
 	switch(nStat)
 	{
 		default:
-			sprintf(szTitle, "F%d", nStat);
+			// szTitle is a caller-owned char*, not a local array, so sizeof() can't
+			// give us its real length here. Every caller (see Stats::Get_Title
+			// call sites in stat/Stats.cc) allocates at least 100 bytes, well over
+			// the ~13 bytes "F" + INT_MIN + '\0' can ever need.
+			snprintf(szTitle, 32, "F%d", nStat);
 			break;
 	}
 }
@@ -263,7 +267,7 @@ bool FMNC_Manager::doTimer_Finish(TimerEvent * pEvent)
 
                 sDumpInfo = pConn->getXML_Summary();
 
-                sprintf(szTemp, "%d-%ld.xml", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
+                snprintf(szTemp, sizeof(szTemp), "%d-%ld.xml", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
 
                 sDumpName = szTemp;
 
@@ -393,7 +397,7 @@ bool FMNC_Manager::doTimer_Cleanup (TimerEvent * pEvent)
 
                     sDumpInfo = pConn->getXML_Summary();
 
-                    sprintf(szTemp, "%d-%ld.xml", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
+                    snprintf(szTemp, sizeof(szTemp), "%d-%ld.xml", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
 
                     sDumpName = szTemp;
 
@@ -425,7 +429,7 @@ bool FMNC_Manager::doTimer_Cleanup (TimerEvent * pEvent)
 
                     //  sDumpInfo = pConn->getTestAnalysis()->GetGraphD3JS();
 
-                    //  sprintf(szTemp, "%d-%ld.html", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
+                    //  snprintf(szTemp, sizeof(szTemp), "%d-%ld.html", pConn->getSessionID(), pConn->getTime_Creation()->tv_sec);
 
                     //  sDumpName = szTemp;
 
