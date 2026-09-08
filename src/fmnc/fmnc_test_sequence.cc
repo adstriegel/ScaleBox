@@ -756,7 +756,7 @@ string  FMNC_Test_Sequence::generate_iframe (uint32_t lID)
 	siFrame = "http://fmnc.cse.nd.edu:8000/result/";
 	/* siFrame = "<script type='text/javascript'>$(\"#result\").load(\"http://google.com"; */
 
-	sprintf(szTemp, "%d-%ld.xml", lID,m_pConnection->getTime_Creation()->tv_sec);
+	snprintf(szTemp, sizeof(szTemp), "%d-%ld.xml", lID,m_pConnection->getTime_Creation()->tv_sec);
 	siFrame += szTemp;
 
 	/* siFrame += " width=\"600\" height=\"400\"></iframe>"; */
@@ -790,7 +790,7 @@ bool FMNC_Test_Sequence::wrapFile_PNG (uint16_t nFixed, uint16_t nStepSeq, uint1
 
 	// Get the time
 	time (&rawtime);
-	sprintf(szTemp, "%s", ctime(&rawtime));
+	snprintf(szTemp, sizeof(szTemp), "%s", ctime(&rawtime));
 	sTemp = szTemp;
 
 	sFrontHeader += "Date: " + sTemp;
@@ -823,7 +823,7 @@ bool FMNC_Test_Sequence::wrapFile_PNG (uint16_t nFixed, uint16_t nStepSeq, uint1
 		return false;
 	}
 
-	sprintf(szTemp, "%d\n", (int) imageFileSize);
+	snprintf(szTemp, sizeof(szTemp), "%d\n", (int) imageFileSize);
 	sTemp = szTemp;
 	sFrontHeader += sTemp;
 
@@ -978,35 +978,35 @@ bool FMNC_Test_Sequence::wrapFile_PNG (uint16_t nFixed, uint16_t nStepSeq, uint1
 		m_pDictionary->addEntry("TestType", "Web-iFrame Result");
 
 		// The total size of the TCP payloads
-		sprintf(szTemp, "%d", m_TransmitBuffer.getTotalLength());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_TransmitBuffer.getTotalLength());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestSize", sData);
 
-		sprintf(szTemp, "%d", nFixed);
+		snprintf(szTemp, sizeof(szTemp), "%d", nFixed);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedPkts", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedSize", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktMin", sData);
 
-		sprintf(szTemp, "%d", (nStepMult+1)*m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", (nStepMult+1)*m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktMax", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktStep", sData);
 
-		sprintf(szTemp, "%d", nStepSeq);
+		snprintf(szTemp, sizeof(szTemp), "%d", nStepSeq);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariableSequences", sData);
 
-		sprintf(szTemp, "%d", nStepMult);
+		snprintf(szTemp, sizeof(szTemp), "%d", nStepMult);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariableSeqPkts", sData);
 	}
@@ -1259,15 +1259,15 @@ void	FMNC_Test_Sequence::createTest_TrainSizeWebDemo (uint8_t type,uint16_t lpac
 		m_pDictionary->addEntry("TestType", "Web-iFrame Result");
 
 		// The total size of the TCP payloads
-		sprintf(szTemp, "%d", m_TransmitBuffer.getTotalLength());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_TransmitBuffer.getTotalLength());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestSize", sData);
 
-		sprintf(szTemp, "%d", m_Transmissions.size());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_Transmissions.size());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestPkts", sData);
 
-		sprintf(szTemp, "%d", lTestFixed);
+		snprintf(szTemp, sizeof(szTemp), "%d", lTestFixed);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedPkts", sData);
 
@@ -1486,15 +1486,15 @@ void	FMNC_Test_Sequence::createTest_TrainGapWebDemo (uint8_t type,uint16_t nGap,
 		m_pDictionary->addEntry("TestType", "Web-iFrame Result");
 
 		// The total size of the TCP payloads
-		sprintf(szTemp, "%d", m_TransmitBuffer.getTotalLength());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_TransmitBuffer.getTotalLength());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestSize", sData);
 
-		sprintf(szTemp, "%d", m_Transmissions.size());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_Transmissions.size());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestPkts", sData);
 
-		sprintf(szTemp, "%d", lTestFixed);
+		snprintf(szTemp, sizeof(szTemp), "%d", lTestFixed);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedPkts", sData);
 
@@ -1715,39 +1715,39 @@ void	FMNC_Test_Sequence::createTest_WebDemo (uint16_t nFixed, uint16_t nStepSeq,
 		m_pDictionary->addEntry("TestType", "Web-iFrame Result");
 
 		// The total size of the TCP payloads
-		sprintf(szTemp, "%d", m_TransmitBuffer.getTotalLength());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_TransmitBuffer.getTotalLength());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestSize", sData);
 
-		sprintf(szTemp, "%d", m_Transmissions.size());
+		snprintf(szTemp, sizeof(szTemp), "%d", m_Transmissions.size());
 		sData = szTemp;
 		m_pDictionary->addEntry("TestPkts", sData);
 
-		sprintf(szTemp, "%d", nFixed);
+		snprintf(szTemp, sizeof(szTemp), "%d", nFixed);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedPkts", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("FixedSize", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktMin", sData);
 
-		sprintf(szTemp, "%d", (nStepMult+1)*m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", (nStepMult+1)*m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktMax", sData);
 
-		sprintf(szTemp, "%d", m_nSliceSize);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nSliceSize);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariablePktStep", sData);
 
-		sprintf(szTemp, "%d", nStepSeq);
+		snprintf(szTemp, sizeof(szTemp), "%d", nStepSeq);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariableSequences", sData);
 
-		sprintf(szTemp, "%d", nStepMult);
+		snprintf(szTemp, sizeof(szTemp), "%d", nStepMult);
 		sData = szTemp;
 		m_pDictionary->addEntry("VariableSeqPkts", sData);
 
@@ -2544,15 +2544,15 @@ string	FMNC_Test_Sequence::getXML ()
 
 	sXML = "<TestSequence ";
 
-	sprintf(szTemp, "%d", m_Transmissions.size());
+	snprintf(szTemp, sizeof(szTemp), "%d", m_Transmissions.size());
 	sTemp = szTemp;
 	sXML += "SeqLength=\"" + sTemp + "\"";
 
-	sprintf(szTemp, "%d", getSliceSize());
+	snprintf(szTemp, sizeof(szTemp), "%d", getSliceSize());
 	sTemp = szTemp;
 	sXML += " SliceSize=\"" + sTemp + "\"";
 
-	sprintf(szTemp, "%d.%d", getSliceSpacing_Sec(), getSliceSpacing_MicroSec());
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", getSliceSpacing_Sec(), getSliceSpacing_MicroSec());
 	sTemp = szTemp;
 	sXML += " SliceSpace=\"" + sTemp + "\"";
 

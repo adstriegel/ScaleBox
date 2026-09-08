@@ -303,12 +303,12 @@ bool FMNC_Test_Analysis::doAnalysis (uint16_t nGroup)
 //
 //
 //		// The total size of the samples
-//		sprintf(szTemp, "%d", m_Pairs.getCount());
+//		snprintf(szTemp, sizeof(szTemp), "%d", m_Pairs.getCount());
 //		sData = szTemp;
 //		m_pDictionary->addEntry("RTT_Samples_All", sData);
 ////
 ////
-////		sprintf(szTemp, "%s", m_pGraph->extractScript());
+////		snprintf(szTemp, sizeof(szTemp), "%s", m_pGraph->extractScript());
 ////		sData = szTemp;
 ////		m_pDictionary->addEntry("D3JS_GRAPH", sData);
 //	}
@@ -473,10 +473,10 @@ string FMNC_Test_Analysis::constructTable_Web ()
 	sWeb += "<td><b>RTT Range</b></td>";
 
 	sWeb += "<td>";
-	sprintf(szTemp, "%f", m_fRTT_Min);
+	snprintf(szTemp, sizeof(szTemp), "%f", m_fRTT_Min);
 	sWeb += szTemp;
 	sWeb += " - ";
-	sprintf(szTemp, "%f", m_fRTT_Max);
+	snprintf(szTemp, sizeof(szTemp), "%f", m_fRTT_Max);
 	sWeb += szTemp;
 	sWeb += "ms</td>";
 	sWeb += "</tr>";
@@ -486,7 +486,7 @@ string FMNC_Test_Analysis::constructTable_Web ()
 	sWeb += "<td><b>RTT Mean</b></td>";
 
 	sWeb += "<td>";
-	sprintf(szTemp, "%f", m_fRTT_Mean);
+	snprintf(szTemp, sizeof(szTemp), "%f", m_fRTT_Mean);
 	sWeb += szTemp;
 	sWeb += "ms</td>";
 	sWeb += "</tr>";
@@ -496,7 +496,7 @@ string FMNC_Test_Analysis::constructTable_Web ()
 	sWeb += "<td><b>RTT Median</b></td>";
 
 	sWeb += "<td>";
-	sprintf(szTemp, "%f", m_fRTT_Median);
+	snprintf(szTemp, sizeof(szTemp), "%f", m_fRTT_Median);
 	sWeb += szTemp;
 	sWeb += "ms</td>";
 	sWeb += "</tr>";
@@ -506,7 +506,7 @@ string FMNC_Test_Analysis::constructTable_Web ()
 	sWeb += "<td><b>RTT Standard Deviation</b></td>";
 
 	sWeb += "<td>";
-	sprintf(szTemp, "%f", m_fRTT_StdDev);
+	snprintf(szTemp, sizeof(szTemp), "%f", m_fRTT_StdDev);
 	sWeb += szTemp;
 	sWeb += "ms</td>";
 	sWeb += "</tr>";

@@ -112,7 +112,7 @@ string 		FMNC_Measurement_Packet::getAttribute_Group()
 	if(m_nGroup != FMNC_MEASUREMENT_GROUP_NONE)
 	{
 		sXML = "Group = \"";
-		sprintf(szTemp, "%d", m_nGroup);
+		snprintf(szTemp, sizeof(szTemp), "%d", m_nGroup);
 		sXML += szTemp;
 		sXML += "\" ";
 	}
@@ -170,7 +170,7 @@ string  FMNC_Measurement_Packet::getJSON_Time ()
 	sJSON = "";
 	sJSON += "\"Time\":";
 
-	sprintf(szTemp, "\"%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "\"%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
 	sJSON += szTemp;
 
 	return sJSON;
@@ -197,7 +197,7 @@ string	FMNC_Measurement_Packet::getAttribute_Time ()
 
 	sXML = "Time=\"";
 
-	sprintf(szTemp, "%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
 
 	sXML += szTemp;
 
@@ -219,7 +219,7 @@ string 	FMNC_Measurement_Packet::getAttribute_Time (timeval * pBaseTime)
 	lSec = lTimeDiff / 1000000;
 
 	sXML = "Time=\"";
-	sprintf(szTemp, "%ud.%ud\"", lSec, lMicroSec);
+	snprintf(szTemp, sizeof(szTemp), "%ud.%ud\"", lSec, lMicroSec);
 	sXML += szTemp;
 	return sXML;
 }
@@ -236,7 +236,7 @@ string 	FMNC_Measurement_Packet::getTime_AsString ()
 
 	sTime = "";
 
-	sprintf(szTemp, "%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%ld.%d\"", m_Time.tv_sec, m_Time.tv_usec);
 
 	sTime += szTemp;
 
@@ -299,7 +299,7 @@ string		FMNC_List_Measurement_Packets::getCount_AsString()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%lu", m_Packets.size());
+	snprintf(szTemp, sizeof(szTemp), "%lu", m_Packets.size());
 	sVal = szTemp;
 	return sVal;
 }
@@ -364,7 +364,7 @@ string 	FMNC_Measurement_Packet_IPv4::getTTL_AsString()
 	char 	szTemp[25];
 	string	sVal;
 
-	sprintf(szTemp, "%d", m_byTTL);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_byTTL);
 
 	sVal = szTemp;
 	return sVal;
@@ -388,7 +388,7 @@ string 	FMNC_Measurement_Packet_IPv4::getTOS_AsString()
 	char 	szTemp[25];
 	string	sVal;
 
-	sprintf(szTemp, "%d", m_byTOS);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_byTOS);
 
 	sVal = szTemp;
 	return sVal;
@@ -409,7 +409,7 @@ string FMNC_Measurement_Packet_IPv4::getLength_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%u", m_nLength);
+	snprintf(szTemp, sizeof(szTemp), "%u", m_nLength);
 	sVal = szTemp;
 
 	return sVal;
@@ -431,7 +431,7 @@ string FMNC_Measurement_Packet_IPv4::getID_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "0x%X", m_nID);
+	snprintf(szTemp, sizeof(szTemp), "0x%X", m_nID);
 	sVal = szTemp;
 
 	return sVal;
@@ -526,7 +526,7 @@ string	FMNC_Measurement_Packet_SYN::getOptionLength_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%d", m_byOptionLength);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_byOptionLength);
 	sVal = szTemp;
 	return sVal;
 }
@@ -548,7 +548,7 @@ string 	FMNC_Measurement_Packet_SYN::getXML ()
 
 		for(int j=0; j<m_byOptionLength; j++)
 		{
-			sprintf(szTemp, "%02X", m_byOptions[j]);
+			snprintf(szTemp, sizeof(szTemp), "%02X", m_byOptions[j]);
 		}
 
 		sXML += "\"";
@@ -576,7 +576,7 @@ string	FMNC_Measurement_Packet_SYN::getClientSeqNum_AsString()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%u", m_lClientSeq);
+	snprintf(szTemp, sizeof(szTemp), "%u", m_lClientSeq);
 
 	sVal = szTemp;
 	return sVal;
@@ -653,7 +653,7 @@ string	FMNC_Measurement_Packet_TCP::getTs_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%ld", m_Ts);
+	snprintf(szTemp, sizeof(szTemp), "%ld", m_Ts);
 
 	sVal = szTemp;
 	return sVal;
@@ -669,7 +669,7 @@ string FMNC_Measurement_Packet_TCP::getSeqNum_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%u", m_lSeqNum);
+	snprintf(szTemp, sizeof(szTemp), "%u", m_lSeqNum);
 	sVal = szTemp;
 
 	return sVal;
@@ -691,7 +691,7 @@ string FMNC_Measurement_Packet_TCP::getAckNum_AsString ()
 	char szTemp[25];
 	string sVal;
 
-	sprintf(szTemp, "%u", m_lAckNum);
+	snprintf(szTemp, sizeof(szTemp), "%u", m_lAckNum);
 	sVal = szTemp;
 
 	return sVal;
