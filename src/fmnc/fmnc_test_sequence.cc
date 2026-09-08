@@ -30,6 +30,17 @@ FMNC_Transmit_BufferBlock::FMNC_Transmit_BufferBlock ()
 
 ///////////////////////////////////////////////////
 
+FMNC_Transmit_BufferBlock::~FMNC_Transmit_BufferBlock ()
+{
+	if(m_bOwnData && m_pData != NULL)
+	{
+		delete [] m_pData;
+		m_pData = NULL;
+	}
+}
+
+///////////////////////////////////////////////////
+
 void FMNC_Transmit_BufferBlock::setData (char * pData)
 {
 	m_pData = pData;
@@ -145,15 +156,15 @@ FMNC_Transmit_Buffer::~FMNC_Transmit_Buffer ()
 {
 	int		j;
 
+	// Each block owns (and frees, if applicable) its own data buffer via its
+	// destructor -- deleting the block here is what actually reclaims it, whereas
+	// previously only the raw data was ever freed and the blocks themselves leaked.
 	for(j=0; j<m_Data.size(); j++)
 	{
-		if(m_Data[j]->getFlag_Ownership() && m_Data[j]->getData() != NULL)
-		{
-			delete m_Data[j]->getData();
-			m_Data[j]->setData(NULL);
-		}
+		delete m_Data[j];
 	}
 
+	m_Data.clear();
 }
 
 void FMNC_Transmit_Buffer::updatePositions ()

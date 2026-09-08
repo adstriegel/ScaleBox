@@ -34,7 +34,7 @@ class FMNC_Connection
 {
 	public:
 		FMNC_Connection ();
-		~FMNC_Connection ();
+		virtual ~FMNC_Connection ();
 
 		virtual bool	isMatch (Packet * pPacket);
 
