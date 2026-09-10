@@ -64,52 +64,55 @@ Whirlwind_GatewayStats::Whirlwind_GatewayStats () : Stats () {
     Allocate(WW_GATEWAY_STAT_LAST);
 }
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void Whirlwind_GatewayStats::Get_Title (int nStat, char* szTitle) {
     switch (nStat) {
         case WW_GATEWAY_WAN_PKTS_ALL:
-	        sprintf(szTitle, "In_Pkts_INet");
+	        snprintf(szTitle, 64, "In_Pkts_INet");
             break;
 	    case WW_GATEWAY_WAN_VOL_ALL:
-            sprintf(szTitle, "In_Vol_INet");
+            snprintf(szTitle, 64, "In_Vol_INet");
             break;
     	case WW_GATEWAY_WAN_PKTS_TCP:
-            sprintf(szTitle, "In_Pkts_TCP");
+            snprintf(szTitle, 64, "In_Pkts_TCP");
             break;
         case WW_GATEWAY_WAN_VOL_TCP:
-	        sprintf(szTitle, "In_Vol_TCP");
+	        snprintf(szTitle, 64, "In_Vol_TCP");
             break;
     	case WW_GATEWAY_WAN_PKTS_UDP:
-	        sprintf(szTitle, "In_Pkts_UDP");
+	        snprintf(szTitle, 64, "In_Pkts_UDP");
 	        break;
 	    case WW_GATEWAY_WAN_VOL_UDP:
-	        sprintf(szTitle, "In_Vol_UDP");
+	        snprintf(szTitle, 64, "In_Vol_UDP");
 	        break;
 	    case WW_GATEWAY_WAN_PKTS_IPV4:
-	        sprintf(szTitle, "In_Pkts_IPV4");
+	        snprintf(szTitle, 64, "In_Pkts_IPV4");
 	        break;
 	    case WW_GATEWAY_WAN_VOL_IPV4:
-	        sprintf(szTitle, "In_Vol_IPV4");
+	        snprintf(szTitle, 64, "In_Vol_IPV4");
 	        break;
 	    case WW_GATEWAY_WAN_PKTS_IPV6:
-	        sprintf(szTitle, "In_Pkts_IPV6");
+	        snprintf(szTitle, 64, "In_Pkts_IPV6");
 	        break;
     	case WW_GATEWAY_WAN_VOL_IPV6:
-	        sprintf(szTitle, "In_Vol_IPV6");
+	        snprintf(szTitle, 64, "In_Vol_IPV6");
 	        break;
     	case WW_GATEWAY_WAN_PKTS_OTHER:
-	        sprintf(szTitle, "In_Pkts_Other");
+	        snprintf(szTitle, 64, "In_Pkts_Other");
             break;
     	case WW_GATEWAY_WAN_VOL_OTHER:
-	        sprintf(szTitle, "In_Vol_Other");
+	        snprintf(szTitle, 64, "In_Vol_Other");
 	        break;
         case WW_GATEWAY_WAN_PKTS_TOOSMALL:
-	        sprintf(szTitle, "In_Pkts_TooSmall");
+	        snprintf(szTitle, 64, "In_Pkts_TooSmall");
             break;
 	    case WW_GATEWAY_WAN_VOL_TOOSMALL:
-	        sprintf(szTitle, "In_Vol_TooSmall");
+	        snprintf(szTitle, 64, "In_Vol_TooSmall");
 	        break;
     	default:
-	        sprintf(szTitle, "F%d", nStat);
+	        snprintf(szTitle, 64, "F%d", nStat);
 	        break;
     }
 }

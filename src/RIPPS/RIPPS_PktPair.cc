@@ -79,8 +79,10 @@ void RIPPS_MonitorPacket::setCallback (Packet * pCallPkt) {
 }
 
 void RIPPS_MonitorPacket::formatShortDump (char * pBuffer) {
+	// pBuffer is a caller-owned char* of unknown size; both extant callers
+	// (RIPPS_PktPair.cc, RIPPS_Connection.cc) pass buffers of at least 256 bytes.
 	//sprintf(pBuffer, "%ld,%ld,%ld,%ld,%ld,%d,%f", m_ArrTime.tv_sec, m_ArrTime.tv_usec, m_DepTime.tv_sec, m_DepTime.tv_usec,m_lAck,m_lPktSize,getLRTT()*1000.0);
-   sprintf(pBuffer, "%ld %ld %ld %ld %ld %d %f G%d %d %d", m_ArrTime.tv_sec, m_ArrTime.tv_usec, m_DepTime.tv_sec, m_DepTime.tv_usec,m_lAck,m_lPktSize,getLRTT()*1000.0,m_bStingGobble,m_nDataSrcPkt,m_nPktNum);
+   snprintf(pBuffer, 256, "%ld %ld %ld %ld %ld %d %f G%d %d %d", m_ArrTime.tv_sec, m_ArrTime.tv_usec, m_DepTime.tv_sec, m_DepTime.tv_usec,m_lAck,m_lPktSize,getLRTT()*1000.0,m_bStingGobble,m_nDataSrcPkt,m_nPktNum);
 }
 
 void RIPPS_MonitorPacket::dumpBrief() {

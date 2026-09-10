@@ -67,7 +67,7 @@ string NetAddressIPv4Subnet::toString () {
 		return "NULL address";
 	}
 	
-	sprintf(szTemp, "%d.%d.%d.%d/%d", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3], (unsigned char) m_nMaskLength);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.%d/%d", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3], (unsigned char) m_nMaskLength);
 
 	sTemp = szTemp;
 	return sTemp;
@@ -81,13 +81,13 @@ string NetAddressIPv4Subnet::toDebugString () {
 	
 	sTemp = "Type=NetAddressIPv4Subnet,";
 	
-	sprintf(szTemp,"Size=%d",getSize());
+	snprintf(szTemp, sizeof(szTemp),"Size=%d",getSize());
 	
 	sTemp += szTemp;
 	
 	sTemp += toString();
 	
-	sprintf(szTemp, ",Mask=%d", m_nMaskLength);
+	snprintf(szTemp, sizeof(szTemp), ",Mask=%d", m_nMaskLength);
 	sTemp += szTemp;
 	
 	return sTemp;

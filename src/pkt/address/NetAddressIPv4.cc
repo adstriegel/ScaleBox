@@ -68,7 +68,7 @@ string NetAddressIPv4::toString () {
 		return "NULL address";
 	}
 	
-	sprintf(szTemp, "%d.%d.%d.%d", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3]);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.%d", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3]);
 
 	sTemp = szTemp;
 	return sTemp;
@@ -82,7 +82,7 @@ string NetAddressIPv4::toDebugString () {
 	
 	sTemp = "Type=NetAddressIPv4,";
 	
-	sprintf(szTemp,"Size=%d",getSize());
+	snprintf(szTemp, sizeof(szTemp),"Size=%d",getSize());
 	
 	sTemp += szTemp;
 	

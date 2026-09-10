@@ -393,6 +393,9 @@ TWiCE_CacheTableStats::TWiCE_CacheTableStats () : Stats ()
 	Allocate(TWICE_CACHETABLE_STAT_LAST);
 }
 
+// szValue is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::GetValueString call sites in stat/Stats.cc) allocates at least 100 bytes.
 void TWiCE_CacheTableStats::GetValueString (int nStat, char * szValue)
 {
 	double fValue;
@@ -409,7 +412,7 @@ void TWiCE_CacheTableStats::GetValueString (int nStat, char * szValue)
 				fValue = (double) Get_Stat(TWICE_CACHE_CONSIDERCACHE_CREATE_CACHE_OFFSET) / (double) Get_Stat(TWICE_CACHE_CONSIDERCACHE_CREATE_CACHE);
 			}
 
-			sprintf(szValue, "%f", fValue);
+			snprintf(szValue, 64, "%f", fValue);
 			break;
 
 		default:
@@ -419,92 +422,95 @@ void TWiCE_CacheTableStats::GetValueString (int nStat, char * szValue)
 
 }
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void TWiCE_CacheTableStats::Get_Title	(int nStat, char * szTitle)
 {
 	switch(nStat)
 	{
 		case TWICE_CACHE_CKSUM_CORRECT_MATCH_INTRA:
-			sprintf(szTitle, "IntraPktMatch");
+			snprintf(szTitle, 64, "IntraPktMatch");
 			break;
 		case TWICE_CACHE_CONSIDERCACHE_NOHITS:
-			sprintf(szTitle, "ConsCacheNoHits");
+			snprintf(szTitle, 64, "ConsCacheNoHits");
 			break;
 		case TWICE_CACHE_CONSIDERCACHE_HASHITS:
-			sprintf(szTitle, "ConsCacheHasHits");
+			snprintf(szTitle, 64, "ConsCacheHasHits");
 			break;
 		case TWICE_CACHE_CONSIDERCACHE_CREATE_CACHE:
-			sprintf(szTitle, "CreateCacheCount");
+			snprintf(szTitle, 64, "CreateCacheCount");
 			break;
 		case TWICE_CACHE_CONSIDERCACHE_CREATE_CACHE_OFFSET:
-			sprintf(szTitle, "CreateCacheCumOffset");
+			snprintf(szTitle, 64, "CreateCacheCumOffset");
 			break;
 		case TWICE_CACHE_AVG_CONSIDERCACHE_CREATE_CACHE_OFFSET:
-			sprintf(szTitle, "CreateCacheAvgOffset");
+			snprintf(szTitle, 64, "CreateCacheAvgOffset");
 			break;
 		case TWICE_CACHE_MAINT_REMOVED_ENTRIES:
-			sprintf(szTitle, "MaintRemovedEntries");
+			snprintf(szTitle, 64, "MaintRemovedEntries");
 			break;
 		case TWICE_CACHE_MAINT_REMOVED_ENTRIES_NOHITS:
-			sprintf(szTitle, "MaintRemovedEntriesNoHits");
+			snprintf(szTitle, 64, "MaintRemovedEntriesNoHits");
 			break;
 		case TWICE_CACHE_MAINT_REMOVED_ENTRIES_HITS:
-			sprintf(szTitle, "MaintRemovedEntriesHits");
+			snprintf(szTitle, 64, "MaintRemovedEntriesHits");
 			break;
 		case TWICE_CACHE_MAINT_REMOVED_ENTRIES_MISSES:
-			sprintf(szTitle, "MaintRemovedEntriesCumMisses");
+			snprintf(szTitle, 64, "MaintRemovedEntriesCumMisses");
 			break;
 		case TWICE_CACHE_CKSUM_COMPS:
-			sprintf(szTitle, "ChecksumComps");
+			snprintf(szTitle, 64, "ChecksumComps");
 			break;
 		case TWICE_CACHE_MISS:
-			sprintf(szTitle, "CountMissAll");
+			snprintf(szTitle, 64, "CountMissAll");
 			break;
 		case TWICE_CACHE_CKSUM_MATCH_VALUE:
-			sprintf(szTitle, "CkSumMatchValue");
+			snprintf(szTitle, 64, "CkSumMatchValue");
 			break;
 		case TWICE_CACHE_CKSUM_CORRECT_MATCH:
-			sprintf(szTitle, "CkSumMatchCorrect");
+			snprintf(szTitle, 64, "CkSumMatchCorrect");
 			break;
 		case TWICE_CACHE_CKSUM_MISTAKE_PCT:
-			sprintf(szTitle, "CkSumMistakePct");
+			snprintf(szTitle, 64, "CkSumMistakePct");
 			break;
 		case TWICE_CACHE_CKSUM_MISTAKE:
-			sprintf(szTitle, "CkSumMistakeCount");
+			snprintf(szTitle, 64, "CkSumMistakeCount");
 			break;
 		case TWICE_CACHE_CKSUM_MISS_PIGEON:
-			sprintf(szTitle, "CkSumPigeon");
+			snprintf(szTitle, 64, "CkSumPigeon");
 			break;
 		case TWICE_CACHE_CONSIDERCACHE_TOOCLOSE:
-			sprintf(szTitle, "SkipTooCloseCount");
+			snprintf(szTitle, 64, "SkipTooCloseCount");
 			break;
 
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_TIGHT:
-			sprintf(szTitle, "HitTypeTight");
+			snprintf(szTitle, 64, "HitTypeTight");
 			break;
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_SHORT:
-			sprintf(szTitle, "HitTypeShort");
+			snprintf(szTitle, 64, "HitTypeShort");
 			break;
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_SHORT_MAX:
-			sprintf(szTitle, "HitTypeShortMax");
+			snprintf(szTitle, 64, "HitTypeShortMax");
 			break;
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_MEDIUM_MIN:
-			sprintf(szTitle, "HitTypeMediumMin");
+			snprintf(szTitle, 64, "HitTypeMediumMin");
 			break;
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_MEDIUM:
-			sprintf(szTitle, "HitTypeMedium");
+			snprintf(szTitle, 64, "HitTypeMedium");
 			break;
 
 		case TWICE_CACHE_HIT_TYPE_COUNT_LUCKY:
-			sprintf(szTitle, "HitTypeLucky");
+			snprintf(szTitle, 64, "HitTypeLucky");
 			break;
 
 		default:
-			sprintf(szTitle, "F%d", nStat);
+			snprintf(szTitle, 64, "F%d", nStat);
 			break;
 	}
 }

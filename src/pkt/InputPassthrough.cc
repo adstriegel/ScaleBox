@@ -118,13 +118,16 @@ StatsInputPassthrough::StatsInputPassthrough () {
 	Allocate(STAT_PTHROUGH_END);	
 }
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void StatsInputPassthrough::Get_Title	(int nStat, char * szTitle) {
 	switch(nStat) {
 		case 	STAT_PTHROUGH_PKTCOUNT:
-			sprintf(szTitle, "PktCount");
+			snprintf(szTitle, 64, "PktCount");
 			break;
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;
 	}	
 }

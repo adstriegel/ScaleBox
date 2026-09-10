@@ -51,74 +51,77 @@ TWiCE_GatewayStats::TWiCE_GatewayStats () : Stats ()
 
 /////////////////////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void	TWiCE_GatewayStats::Get_Title	(int nStat, char * szTitle)
 {
 	switch(nStat)
 	{
 		case TWICE_GATEWAY_WAN_WCACHE_CLONE_PKT:
-			sprintf(szTitle, "ClonePool");
+			snprintf(szTitle, 64, "ClonePool");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS:
-			sprintf(szTitle, "In_Pkts_INet");
+			snprintf(szTitle, 64, "In_Pkts_INet");
 			break;
 		case TWICE_GATEWAY_WAN_VOL:
-			sprintf(szTitle, "In_Vol_INet");
+			snprintf(szTitle, 64, "In_Vol_INet");
 			break;
 		case TWICE_GATEWAY_WAN_WCACHE_TOO_SMALL_PKTS:
-			sprintf(szTitle, "CountTooSmall");
+			snprintf(szTitle, 64, "CountTooSmall");
 			break;
 		case TWICE_GATEWAY_WAN_WCACHE_HIT_MULTI:
-			sprintf(szTitle, "WCache_Multi_Hit");
+			snprintf(szTitle, 64, "WCache_Multi_Hit");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS_IPV6:
-			sprintf(szTitle, "CountIPv6");
+			snprintf(szTitle, 64, "CountIPv6");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS_TCP:
-			sprintf(szTitle, "CountTCP");
+			snprintf(szTitle, 64, "CountTCP");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS_UDP:
-			sprintf(szTitle, "CountUDP");
+			snprintf(szTitle, 64, "CountUDP");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS_IPV4:
-			sprintf(szTitle, "CountIPv4");
+			snprintf(szTitle, 64, "CountIPv4");
 			break;
 		case TWICE_GATEWAY_WAN_PKTS_OTHER:
-			sprintf(szTitle, "CountNonIP");
+			snprintf(szTitle, 64, "CountNonIP");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_LTE96:
-			sprintf(szTitle, "CountMatch96LTE");
+			snprintf(szTitle, 64, "CountMatch96LTE");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_LTE128:
-			sprintf(szTitle, "CountMatch128LTE");
+			snprintf(szTitle, 64, "CountMatch128LTE");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_LTE256:
-			sprintf(szTitle, "CountMatch256LTE");
+			snprintf(szTitle, 64, "CountMatch256LTE");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_LTE512:
-			sprintf(szTitle, "CountMatch512LTE");
+			snprintf(szTitle, 64, "CountMatch512LTE");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_LTE1024:
-			sprintf(szTitle, "CountMatch1024LTE");
+			snprintf(szTitle, 64, "CountMatch1024LTE");
 			break;
 		case TWICE_GATEWAY_WAN_MATCH_COUNT_GT1024:
-			sprintf(szTitle, "CountMatch1024GT");
+			snprintf(szTitle, 64, "CountMatch1024GT");
 			break;
 
 		case TWICE_GATEWAY_WAN_PKTS_MATCH:
-			sprintf(szTitle, "CountMatchPkts");
+			snprintf(szTitle, 64, "CountMatchPkts");
 			break;
 
 		case TWICE_GATEWAY_WAN_PKTS_TCP_MATCH:
-			sprintf(szTitle, "CountMatchTCP_Pkts");
+			snprintf(szTitle, 64, "CountMatchTCP_Pkts");
 			break;
 
 		case TWICE_GATEWAY_WAN_PKTS_UDP_MATCH:
-			sprintf(szTitle, "CountMatchUDP_Pkts");
+			snprintf(szTitle, 64, "CountMatchUDP_Pkts");
 			break;
 
 
 		default:
-			sprintf(szTitle, "F%d", nStat);
+			snprintf(szTitle, 64, "F%d", nStat);
 			break;
 	}
 }
@@ -389,7 +392,7 @@ CommandResult TWiCE_Gateway::processExtCommand (const vector<string> & theComman
 
 			char	szTime[80];
 
-			sprintf(szTime, "%d.csv", cTime.tv_sec);
+			snprintf(szTime, sizeof(szTime), "%d.csv", cTime.tv_sec);
 
 			m_LogFile.open(szTime);
 

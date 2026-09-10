@@ -44,54 +44,57 @@ PktCacheSrcModStats::PktCacheSrcModStats () : Stats () {
 
 //////////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void PktCacheSrcModStats::Get_Title	(int nStat, char * szTitle) {	
 	switch(nStat) {
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS:
-			sprintf(szTitle, "NumPktsAll");
+			snprintf(szTitle, 64, "NumPktsAll");
 			break;
 		
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_SRC:
-			sprintf(szTitle, "NumPktsSrcSide");
+			snprintf(szTitle, 64, "NumPktsSrcSide");
 			break;
 		
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_CHILD:
-			sprintf(szTitle, "NumPktsChildSide");
+			snprintf(szTitle, 64, "NumPktsChildSide");
 			break;
 		
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_NONIP:
-			sprintf(szTitle, "NumPktsNonIP");
+			snprintf(szTitle, 64, "NumPktsNonIP");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_SIZE_PKTS_NONIP:
-			sprintf(szTitle, "SizePktsNonIP");
+			snprintf(szTitle, 64, "SizePktsNonIP");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_IPV6:
-			sprintf(szTitle, "NumPktsIPv6");
+			snprintf(szTitle, 64, "NumPktsIPv6");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_SIZE_PKTS_IPV6:
-			sprintf(szTitle, "SizePktsIPv6");
+			snprintf(szTitle, 64, "SizePktsIPv6");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_NONUDPTCP:
-			sprintf(szTitle, "NumPktsNotIPData");
+			snprintf(szTitle, 64, "NumPktsNotIPData");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_SIZE_PKTS_NONUDPTCP:
-			sprintf(szTitle, "SizePktsNotIPData");
+			snprintf(szTitle, 64, "SizePktsNotIPData");
 			break;
 
 		case PKTCACHE_SRCMOD_STAT_NUM_PKTS_TOOSMALL:
-			sprintf(szTitle, "NumPktsTooSmall");
+			snprintf(szTitle, 64, "NumPktsTooSmall");
 			break;
 			
 		case PKTCACHE_SRCMOD_STAT_SIZE_PKTS_TOOSMALL:
-			sprintf(szTitle, "SizePktsTooSmall");
+			snprintf(szTitle, 64, "SizePktsTooSmall");
 			break;
 			
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;
 	}			
 }

@@ -215,7 +215,7 @@ string		GraphD3JSLine::getSetting_DisplayWidth  ()
 
 	sSetting = "WIDTH = ";
 
-	sprintf(szTemp, "%d", m_nDisplay_Width);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nDisplay_Width);
 	sSetting += szTemp;
 	sSetting += ",\n";
 
@@ -229,7 +229,7 @@ string		GraphD3JSLine::getSetting_DisplayHeight ()
 
 	sSetting = "HEIGHT = ";
 
-	sprintf(szTemp, "%d", m_nDisplay_Height);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nDisplay_Height);
 	sSetting += szTemp;
 	sSetting += ",\n";
 
@@ -245,22 +245,22 @@ string		GraphD3JSLine::getSetting_Margins ()
 	sSetting = "MARGINS = {\n";
 
 	sSetting += "  top: ";
-	sprintf(szTemp, "%d", m_nMargin_Top);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nMargin_Top);
 	sSetting += szTemp;
 	sSetting += ",\n";
 
 	sSetting += "  bottom: ";
-	sprintf(szTemp, "%d", m_nMargin_Bottom);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nMargin_Bottom);
 	sSetting += szTemp;
 	sSetting += ",\n";
 
 	sSetting += "  left: ";
-	sprintf(szTemp, "%d", m_nMargin_Left);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nMargin_Left);
 	sSetting += szTemp;
 	sSetting += ",\n";
 
 	sSetting += "  right: ";
-	sprintf(szTemp, "%d", m_nMargin_Right);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nMargin_Right);
 	sSetting += szTemp;
 	sSetting += "\n";
 

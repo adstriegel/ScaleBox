@@ -183,7 +183,10 @@ unsigned int RIPPS_Connection::getMonitorSet () {
 }
 				
 void RIPPS_Connection::determineLogName (char * pOut) {
-	sprintf(pOut, "%d.%d.%d.%d-T%d-Set%d-SP%d-DP%d.csv", (unsigned char) m_IntIP[0], (unsigned char) m_IntIP[1], (unsigned char) m_IntIP[2], (unsigned char)  m_IntIP[3], (unsigned int) m_firstPkt.tv_sec, m_nMonitorSet, m_nIntPort, m_nExtPort);		
+	// pOut is a caller-owned char* of unknown size; the only extant caller
+	// (mon/Thread_Archive.cc, not part of the Makefile build) passes a 256-byte
+	// buffer. Worst case for this format is ~63 bytes, so 128 leaves headroom.
+	snprintf(pOut, 128, "%d.%d.%d.%d-T%d-Set%d-SP%d-DP%d.csv", (unsigned char) m_IntIP[0], (unsigned char) m_IntIP[1], (unsigned char) m_IntIP[2], (unsigned char)  m_IntIP[3], (unsigned int) m_firstPkt.tv_sec, m_nMonitorSet, m_nIntPort, m_nExtPort);
 }
 		
 unsigned short RIPPS_Connection::getRetransmissions () {
@@ -539,25 +542,25 @@ NodeDOM * RIPPS_Connection::getStats (NodeDOM * pRoot) {
 		
 	char	szTemp[64];
 	
-	sprintf(szTemp, "%d.%d", m_lastData.tv_sec, m_lastData.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", m_lastData.tv_sec, m_lastData.tv_usec);
 	pDataNode = NodeDOM::createNodeDOM();
 	pDataNode->setTag("LastData");
 	pDataNode->setData(szTemp);
 	pNode->addChild(pDataNode);	
 	
-	sprintf(szTemp, "%d.%d", m_lastAck.tv_sec, m_lastAck.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", m_lastAck.tv_sec, m_lastAck.tv_usec);
 	pDataNode = NodeDOM::createNodeDOM();
 	pDataNode->setTag("LastACK");
 	pDataNode->setData(szTemp);
 	pNode->addChild(pDataNode);		
 		
-	sprintf(szTemp, "%d.%d", m_firstPkt.tv_sec, m_firstPkt.tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", m_firstPkt.tv_sec, m_firstPkt.tv_usec);
 	pDataNode = NodeDOM::createNodeDOM();
 	pDataNode->setTag("FirstPkt");
 	pDataNode->setData(szTemp);	
 	pNode->addChild(pDataNode);
 
-	sprintf(szTemp, "%d", m_nRetransmissions);
+	snprintf(szTemp, sizeof(szTemp), "%d", m_nRetransmissions);
 	pDataNode = NodeDOM::createNodeDOM();
 	pDataNode->setTag("DataRTs");
 	pDataNode->setData(szTemp);
@@ -613,19 +616,22 @@ RIPPS_ListConnStats::RIPPS_ListConnStats () {
 
 /////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void	RIPPS_ListConnStats::Get_Title	(int nStat, char * szTitle) {
 	switch(nStat) {
 		case 	RIPPS_LISTCONN_STAT_NODATACONN:
-			sprintf(szTitle, "ConnsNoData");
+			snprintf(szTitle, 64, "ConnsNoData");
 			break;	
 		case RIPPS_LISTCONN_STAT_FINDMISS_EXT:
-			sprintf(szTitle, "FindMissExternal");
+			snprintf(szTitle, 64, "FindMissExternal");
 			break;	
 		case RIPPS_LISTCONN_STAT_FINDMISS_INT:
-			sprintf(szTitle, "FindMissInternal");
+			snprintf(szTitle, 64, "FindMissInternal");
 			break;			
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;			
 	}
 }

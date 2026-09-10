@@ -610,7 +610,7 @@ string IPv4toString (char* pData) {
 	string	sResult;
 	char	szTemp[21];
 	
-	sprintf(szTemp, "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
 	sResult = szTemp;
 	
 	return sResult;	
@@ -620,7 +620,7 @@ string IPv4toString_24 (char* pData) {
     string  sResult;
     char    szTemp[21];
 
-    sprintf(szTemp, "%d.%d.%d.0/24", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2]);
+    snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.0/24", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2]);
     sResult = szTemp;
 
     return sResult;

@@ -59,6 +59,9 @@ void Stats::Add_Stat (int nStat, uint64_t nVal) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void Stats::Get_Title (int nStat, char* szTitle) {
 	if(nStat >= m_nSize || nStat < 0) {
 		printf("* Warning: Illegal value for stats field in Get_Stat (%d)\n", nStat);
@@ -66,7 +69,7 @@ void Stats::Get_Title (int nStat, char* szTitle) {
 		return;
 	}
 
-	sprintf(szTitle, "F%04d", nStat);
+	snprintf(szTitle, 64, "F%04d", nStat);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +131,7 @@ void Stats::writeGIPSE_XML (char* szFile) {
 
     for (j = 0; j < m_nSize; j++) {
         Get_Title(j, szTemp);		
-        sprintf(szOut, "        <dataPoint name = %c%s%c value = %c%d%c />", 34,szTemp,34,34,m_pnStats[j],34);
+        snprintf(szOut, sizeof(szOut), "        <dataPoint name = %c%s%c value = %c%d%c />", 34,szTemp,34,34,m_pnStats[j],34);
         OutFile << szOut << endl;
     } 
 }
@@ -167,8 +170,11 @@ void Stats::computeDiff (Stats* p1, Stats* p2) {
     }
 }
 
+// szValue is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::GetValueString call sites in stat/Stats.cc) allocates at least 100 bytes.
 void Stats::GetValueString (int nStat, char* szValue) {
-	sprintf(szValue, "%llu", m_pnStats[nStat]);
+	snprintf(szValue, 64, "%llu", m_pnStats[nStat]);
 }
 
 void Stats::logCSV_FieldNames (ofstream& outStream) {
@@ -287,7 +293,7 @@ NodeDOM* Stats::getStats (NodeDOM * pRoot, string sTag) {
 		pElemName->setName("name");
 		pElemName->setValue(szTemp);
 		
-		sprintf(szTemp, "%llu", m_pnStats[j]);
+		snprintf(szTemp, sizeof(szTemp), "%llu", m_pnStats[j]);
 		
 		pElemValue->setName("value");
 		pElemValue->setValue(szTemp);

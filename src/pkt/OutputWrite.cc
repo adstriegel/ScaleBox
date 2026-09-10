@@ -86,22 +86,25 @@ StatsOutputWrite::StatsOutputWrite () {
 }
 
 	
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void StatsOutputWrite::Get_Title (int nStat, char * szTitle) {
 	switch(nStat) {
 		case 	STAT_OWRITE_PKTCOUNT:
-			sprintf(szTitle, "PktCount");
+			snprintf(szTitle, 64, "PktCount");
 			break;
 		case STAT_OWRITE_PKTSIZE:
-			sprintf(szTitle, "PktSize");		
+			snprintf(szTitle, 64, "PktSize");		
 			break;
 		case STAT_OWRITE_INTQUEUE:
-			sprintf(szTitle, "IntQueueDelay");		
+			snprintf(szTitle, 64, "IntQueueDelay");		
 			break;
 		case 	STAT_OWRITE_AVG_INTQUEUE:
-			sprintf(szTitle, "AvgIntQueueDelay");		
+			snprintf(szTitle, 64, "AvgIntQueueDelay");		
 			break;			
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;
 	}		
 }

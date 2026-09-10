@@ -61,7 +61,7 @@ void NodeElem::setValue (string sValue) {
 void NodeElem::setValue (int nValue) {
 	char	szTemp[17];
 	
-	sprintf(szTemp, "%d", nValue);	
+	snprintf(szTemp, sizeof(szTemp), "%d", nValue);	
 	
 	m_sValue = szTemp;
 }
@@ -81,7 +81,7 @@ string NodeElem::getXML () {
 	}
 	
 	// Format the string as --> Name="Value" <-- 
-	sprintf(szTest, " %s=%c%s%c", m_sName.c_str(), 34, m_sValue.c_str(), 34); 
+	snprintf(szTest, sizeof(szTest), " %s=%c%s%c", m_sName.c_str(), 34, m_sValue.c_str(), 34); 
 	
 	tempString = szTest;
 	
