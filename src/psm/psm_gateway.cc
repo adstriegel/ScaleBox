@@ -28,15 +28,18 @@ PSM_GatewayStats::PSM_GatewayStats () : Stats ()
 
 /////////////////////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void	PSM_GatewayStats::Get_Title	(int nStat, char * szTitle)
 {
 	switch(nStat)
 	{
 		case PSM_GATEWAY_WAN_PKTS:
-			sprintf(szTitle, "Pkts(WAN)");
+			snprintf(szTitle, 64, "Pkts(WAN)");
 			break;
 		default:
-			sprintf(szTitle, "F%d", nStat);
+			snprintf(szTitle, 64, "F%d", nStat);
 			break;
 	}
 }

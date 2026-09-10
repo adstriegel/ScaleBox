@@ -138,7 +138,7 @@ void StatManager::sendAll (string & sData) {
 	
 	pthread_mutex_lock(&m_mutexClientList);		
 	
-	sprintf(szEOD, "\n##EOS##\n");
+	snprintf(szEOD, sizeof(szEOD), "\n##EOS##\n");
 	
 	for(j=0; j<m_Clients.size(); j++) {
 		pClient = m_Clients[j];

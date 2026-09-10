@@ -33,46 +33,49 @@ StatsAdapterFile::StatsAdapterFile () {
 
 /////////////////////////////////////////////////////////////////		
 		
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void StatsAdapterFile::Get_Title (int nStat, char * szTitle) {
 	switch(nStat) {
 		case STAT_ADPFILE_PKTCOUNT:
-			sprintf(szTitle, "PktCount");
+			snprintf(szTitle, 64, "PktCount");
 			break;
 			
 		case STAT_ADPFILE_PKTDATA:
-			sprintf(szTitle, "PktData");
+			snprintf(szTitle, 64, "PktData");
 			break;
 	
 		case STAT_ADPFILE_FILESPARSED:
-			sprintf(szTitle, "FilesParsed");
+			snprintf(szTitle, 64, "FilesParsed");
 			break;
 
 		case STAT_ADPFILE_LOOPSFINISHED:
-			sprintf(szTitle,"LoopsFinished");
+			snprintf(szTitle, 64,"LoopsFinished");
 			break;
 			
 		case STAT_ADPFILE_LOOPSLEFT:
-			sprintf(szTitle, "LoopsLeft");
+			snprintf(szTitle, 64, "LoopsLeft");
 			break;
 	
 		case STAT_ADPFILE_BADCAPLEN:
-			sprintf(szTitle, "BadCaptureLength");
+			snprintf(szTitle, 64, "BadCaptureLength");
 			break;
 			
 		case STAT_ADPFILE_TOOLARGE:
-			sprintf(szTitle, "PktsTooLarge");
+			snprintf(szTitle, 64, "PktsTooLarge");
 			break;
 
 		case STAT_ADPFILE_EXCEEDBACKLOG:
-			sprintf(szTitle, "PktBacklogExceeded");			
+			snprintf(szTitle, 64, "PktBacklogExceeded");			
 			break;
 			
 		case STAT_ADPFILE_EXCEEDBACKLOG_DURATION:
-			sprintf(szTitle, "PktBacklogExceededYields");
+			snprintf(szTitle, 64, "PktBacklogExceededYields");
 			break;
 			
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;
 	}	
 }

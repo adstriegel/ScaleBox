@@ -86,7 +86,7 @@ string getIPv4_Dst_80211 (char* pPacket) {
 	char szTemp[21];
 	char* pData = pPacket + LENGTH_80211 + LENGTH_LLC + OFFSET_IPV4_PROTOCOL_DSTIP;
 
-	sprintf(szTemp, "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
     sRet = szTemp;
 
 	return sRet;
@@ -97,7 +97,7 @@ string getIPv4_Src_80211 (char* pPacket) {
     char szTemp[21];
     char* pData = pPacket + LENGTH_80211 + LENGTH_LLC + OFFSET_IPV4_PROTOCOL_SRCIP;
 
-    sprintf(szTemp, "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
+    snprintf(szTemp, sizeof(szTemp), "%d.%d.%d.%d", (unsigned char) pData[0], (unsigned char) pData[1], (unsigned char) pData[2], (unsigned char) pData[3]);
     sRet = szTemp;
 
     return sRet;

@@ -67,7 +67,7 @@ string NetAddressEthernet::toString () {
 		return "NULL address";
 	}
 	
-	sprintf(szTemp, "%02X:%02X:%02X:%02X:%02X:%02X", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3], (unsigned char) pAddress[4], (unsigned char) pAddress[5]);
+	snprintf(szTemp, sizeof(szTemp), "%02X:%02X:%02X:%02X:%02X:%02X", (unsigned char) pAddress[0], (unsigned char) pAddress[1], (unsigned char) pAddress[2], (unsigned char) pAddress[3], (unsigned char) pAddress[4], (unsigned char) pAddress[5]);
 	
 	sTemp = szTemp;
 	return sTemp;
@@ -81,7 +81,7 @@ string NetAddressEthernet::toDebugString () {
 	
 	sTemp = "Type=NetAddressEthernet,";
 	
-	sprintf(szTemp,"Size=%d",getSize());
+	snprintf(szTemp, sizeof(szTemp),"Size=%d",getSize());
 	
 	sTemp += szTemp;
 	

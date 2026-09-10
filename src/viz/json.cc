@@ -41,7 +41,7 @@ string 	outputJSON (string sField, double fValue)
 	char 	szTemp[50];
 	string 	sJSON;
 
-	sprintf(szTemp, "%f", fValue);
+	snprintf(szTemp, sizeof(szTemp), "%f", fValue);
 
 //	sJSON = wrapQuotes(sField) + ":";
 	sJSON = sField + " : ";
@@ -62,7 +62,7 @@ string 	outputJSON (string sField, timeval * pVal)
 		return "";
 	}
 
-	sprintf(szTemp, "%d.%d", pVal->tv_sec, pVal->tv_usec);
+	snprintf(szTemp, sizeof(szTemp), "%d.%d", pVal->tv_sec, pVal->tv_usec);
 
 	sJSON = wrapQuotes(sField) + ":";
 	sJSON = wrapQuotes(szTemp);

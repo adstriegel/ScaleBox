@@ -35,67 +35,70 @@ RIPPS_MonitorStats::RIPPS_MonitorStats () : Stats () {
 
 //////////////////////////////////////////////////////////////
 
+// szTitle is a caller-owned char*, not a local array, so sizeof() can't tell us its
+// real length here. Bounded with an explicit literal instead -- every caller (see
+// Stats::Get_Title call sites in stat/Stats.cc) allocates at least 100 bytes.
 void RIPPS_MonitorStats::Get_Title	(int nStat, char * szTitle) {	
 	switch(nStat) {
 		case 	RIPPS_MONITOR_STAT_PKTS_EXT_INCOMING:
-			sprintf(szTitle, "ExtInboundPkts");
+			snprintf(szTitle, 64, "ExtInboundPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_EXT_FILTER:
-			sprintf(szTitle, "ExtFilterPkts");
+			snprintf(szTitle, 64, "ExtFilterPkts");
 			break;		
 		case 	RIPPS_MONITOR_STAT_PKTS_EXT_VALIDATED:
-			sprintf(szTitle, "ExtValidatePkts");
+			snprintf(szTitle, 64, "ExtValidatePkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_INT_OUTGOING:
-			sprintf(szTitle, "IntOutboundPkts");
+			snprintf(szTitle, 64, "IntOutboundPkts");
 			break;	
 		case 	RIPPS_MONITOR_STAT_PKTS_INT_FILTER:
-			sprintf(szTitle, "IntFilterPkts");
+			snprintf(szTitle, 64, "IntFilterPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_INT_UNKHOST:
-			sprintf(szTitle, "IntUnknownHostPkts");
+			snprintf(szTitle, 64, "IntUnknownHostPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_INT_ACK_UNKHOST:
-			sprintf(szTitle, "IntUnknownHostAckPkts");
+			snprintf(szTitle, 64, "IntUnknownHostAckPkts");
 			break;	
 		case 	RIPPS_MONITOR_STAT_PKTS_INT_FIN_UNKHOST:
-			sprintf(szTitle, "IntUnknownHostFinPkts");
+			snprintf(szTitle, 64, "IntUnknownHostFinPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_HOST_VALIDATIONS:
-			sprintf(szTitle, "HostValidations");
+			snprintf(szTitle, 64, "HostValidations");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_GOBBLE:
-			sprintf(szTitle, "GobbledPkts");
+			snprintf(szTitle, 64, "GobbledPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_GOBBLE_DATA:
-			sprintf(szTitle, "MarkGobbleDataPkts");
+			snprintf(szTitle, 64, "MarkGobbleDataPkts");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_GOBBLE_YUM:
-			sprintf(szTitle, "PureAckGobbles");
+			snprintf(szTitle, 64, "PureAckGobbles");
 			break;	
 		case 	RIPPS_MONITOR_STAT_PKTS_EXT_SMALL:
-			sprintf(szTitle, "NoSliceTooSmall");
+			snprintf(szTitle, 64, "NoSliceTooSmall");
 			break;	
 		case 	RIPPS_MONITOR_STAT_PKTS_EXT_PUREACK:
-			sprintf(szTitle, "ExtPureAcks");
+			snprintf(szTitle, 64, "ExtPureAcks");
 			break;
 		case 	RIPPS_MONITOR_STAT_PKTS_SLICE_STING:
-			sprintf(szTitle, "StingSlicePkts");
+			snprintf(szTitle, 64, "StingSlicePkts");
 			break;						
 		case 	RIPPS_MONITOR_STAT_PKTS_POST_SHAPE:
-			sprintf(szTitle, "ShapedPktCount");
+			snprintf(szTitle, 64, "ShapedPktCount");
 			break;									
 		case 	RIPPS_MONITOR_STAT_TIMER_SHAPE_QUEUE:
-			sprintf(szTitle, "TimerShapeQueue");
+			snprintf(szTitle, 64, "TimerShapeQueue");
 			break;		
 		case 	RIPPS_MONITOR_STAT_TIMER_POST_SHAPE:
-			sprintf(szTitle, "TimerPostShape");
+			snprintf(szTitle, 64, "TimerPostShape");
 			break;	
 		case 	RIPPS_MONITOR_STAT_PKTS_SLICED:
-			sprintf(szTitle, "SlicePktCount");
+			snprintf(szTitle, 64, "SlicePktCount");
 			break;																																						
 		default:
-			sprintf(szTitle, "F%03d", nStat);
+			snprintf(szTitle, 64, "F%03d", nStat);
 			break;
 	}			
 }
