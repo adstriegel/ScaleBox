@@ -1,0 +1,7 @@
+*.o
+/src/ScaleBox
+/src/pcache
+/src/PktCache
+/src/twicegw
+/src/viztest
+/src/rwap-ripps
